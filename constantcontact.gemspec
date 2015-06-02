@@ -5,7 +5,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |s|
   s.name = "constantcontact"
-  s.version = '2.0.1'
+  s.version = '2.0.1.1'
   s.platform = Gem::Platform::RUBY
   s.authors = ["ConstantContact"]
   s.homepage = "http://www.constantcontact.com"
@@ -23,9 +23,8 @@ Gem::Specification.new do |s|
   s.executables = []
   s.require_paths = [ "lib" ]
   s.test_files = Dir['spec/**/*_spec.rb']
-  
+
   s.add_runtime_dependency("rest-client", '~> 1.6', '>= 1.6.7')
   s.add_runtime_dependency("json", '~> 1.8', '>= 1.8.1')
-  s.add_runtime_dependency('mime-types', '~> 2.4', '>= 2.4.1')
   s.add_development_dependency("rspec", '~> 2.14')
 end
