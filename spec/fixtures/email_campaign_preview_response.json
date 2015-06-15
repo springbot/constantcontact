@@ -1,0 +1,7 @@
+{
+  "subject": "Example subject line",
+  "from_email": "fromemail@example.com",
+  "reply_to_email": "replytoemail@example.com",
+  "preview_email_content": "<body><p>This is text of the email message.</p></body>",
+  "preview_text_content": "This is the text of the email message."
+}

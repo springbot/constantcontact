@@ -35,6 +35,7 @@ module ConstantContact
 
           :campaigns                      => 'emailmarketing/campaigns',
           :campaign                       => 'emailmarketing/campaigns/%s',
+          :campaign_preview               => 'emailmarketing/campaigns/%s/preview',
           :campaign_schedules             => 'emailmarketing/campaigns/%s/schedules',
           :campaign_schedule              => 'emailmarketing/campaigns/%s/schedules/%s',
           :campaign_test_sends            => 'emailmarketing/campaigns/%s/tests',
@@ -143,7 +144,7 @@ module ConstantContact
       class << self
         attr_accessor :props
 
-         def configure 
+         def configure
           yield props if block_given?
         end
 

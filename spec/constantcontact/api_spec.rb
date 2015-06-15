@@ -17,13 +17,13 @@ describe ConstantContact::Api do
   end
 
   it "without api_key defined" do
-    lambda { 
+    lambda {
       ConstantContact::Api.new
     }.should raise_error(ArgumentError, ConstantContact::Util::Config.get('errors.api_key_missing'))
   end
 
   it "without access_token defined" do
-    lambda { 
+    lambda {
       ConstantContact::Api.new('api_key')
     }.should raise_error(ArgumentError, ConstantContact::Util::Config.get('errors.access_token_missing'))
   end
@@ -296,7 +296,7 @@ describe ConstantContact::Api do
         net_http_resp = Net::HTTPResponse.new(1.0, 200, 'OK')
         response = RestClient::Response.create(json, net_http_resp, {}, @request)
         RestClient.stub(:get).and_return(response)
-        
+
         events = @api.get_events()
         events.should be_kind_of(ConstantContact::Components::ResultSet)
         events.results.collect{|e| e.should be_kind_of(ConstantContact::Components::Event) }
@@ -724,6 +724,20 @@ describe ConstantContact::Api do
         RestClient.stub(:get).and_return(response)
 
         campaign = @api.get_email_campaign(1)
+        campaign.should be_kind_of(ConstantContact::Components::Campaign)
+        campaign.name.should eq('Campaign Name')
+      end
+    end
+
+    describe "#get_email_campaign_preview" do
+      it "gets an individual campaign's preview" do
+        json_response = load_file('email_campaign_response.json')
+        net_http_resp = Net::HTTPResponse.new(1.0, 200, 'OK')
+
+        response = RestClient::Response.create(json_response, net_http_resp, {}, @request)
+        RestClient.stub(:get).and_return(response)
+
+        campaign = @api.get_email_campaign_preview(1)
         campaign.should be_kind_of(ConstantContact::Components::Campaign)
         campaign.name.should eq('Campaign Name')
       end

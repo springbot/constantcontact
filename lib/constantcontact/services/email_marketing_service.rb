@@ -51,6 +51,21 @@ module ConstantContact
           Components::Campaign.create(JSON.parse(response.body))
         end
 
+        # Get campaign email content for a specific campaign
+        # @param [Integer] campaign_id - Valid campaign id
+        # @return [Campaign]
+        def get_campaign_preview(campaign_id)
+          url = Util::Config.get('endpoints.base_url') +
+                sprintf(Util::Config.get('endpoints.campaign_preview'), campaign_id)
+          url = build_url(url)
+          response = RestClient.get(url, get_headers())
+          data = JSON.parse(response.body)
+          campaign = Components::Campaign.create(data)
+          campaign.email_content = data['preview_email_content']
+          campaign.text_content = data['preview_text_content']
+          campaign
+        end
+
 
         # Delete an email campaign
         # @param [Integer] campaign_id - Valid campaign id

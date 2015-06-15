@@ -191,6 +191,14 @@ module ConstantContact
     end
 
 
+    # Get an individual campaign's preview
+    # @param [Integer] campaign_id - Valid campaign id
+    # @return [Campaign]
+    def get_email_campaign_preview(campaign_id)
+      Services::EmailMarketingService.get_campaign_preview(campaign_id)
+    end
+
+
     # Delete an individual campaign
     # @param [Mixed] campaign - Id of a campaign or a Campaign object
     # @raise IllegalArgumentException - if a Campaign object or campaign id is not passed
@@ -910,12 +918,12 @@ module ConstantContact
     # Adds a new MyLibrary file using the multipart content-type
     # @param [String] file_name - The name of the file (ie: dinnerplate-special.jpg)
     # @param [String] folder_id - Folder id to add the file to
-    # @param [String] description - The description of the file provided by user 
-    # @param [String] source - indicates the source of the original file; 
+    # @param [String] description - The description of the file provided by user
+    # @param [String] source - indicates the source of the original file;
     #                          image files can be uploaded from the following sources :
     #                          MyComputer, StockImage, Facebook - MyLibrary Plus customers only,
     #                          Instagram - MyLibrary Plus customers only, Shutterstock, Mobile
-    # @param [String] file_type - Specifies the file type, valid values are: JPEG, JPG, GIF, PDF, PNG 
+    # @param [String] file_type - Specifies the file type, valid values are: JPEG, JPG, GIF, PDF, PNG
     # @param [String] contents - The content of the file
     # @return [LibraryFile]
     def add_library_file(file_name, folder_id, description, source, file_type, contents)
@@ -932,7 +940,7 @@ module ConstantContact
 
 
     # Delete one or more MyLibrary files specified by the fileId path parameter;
-    # separate multiple file IDs with a comma. 
+    # separate multiple file IDs with a comma.
     # Deleted files are moved from their current folder into the system Trash folder, and its status is set to Deleted.
     # @param [String] file_id - Specifies the MyLibrary file to delete
     # @return [Boolean]
@@ -941,7 +949,7 @@ module ConstantContact
     end
 
 
-    # Retrieve the upload status for one or more MyLibrary files using the file_id path parameter; 
+    # Retrieve the upload status for one or more MyLibrary files using the file_id path parameter;
     # separate multiple file IDs with a comma
     # @param [String] file_id - Specifies the files for which to retrieve upload status information
     # @return [Array<UploadStatus>]

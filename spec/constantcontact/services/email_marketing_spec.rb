@@ -40,6 +40,22 @@ describe ConstantContact::Services::EmailMarketingService do
     end
   end
 
+  describe "#get_campaign_preview" do
+    it "returns a campaign preview" do
+      json_response = load_file('email_campaign_preview_response.json')
+      net_http_resp = Net::HTTPResponse.new(1.0, 200, 'OK')
+
+      response = RestClient::Response.create(json_response, net_http_resp, {}, @request)
+      RestClient.stub(:get).and_return(response)
+
+      campaign = ConstantContact::Services::EmailMarketingService.get_campaign_preview(1)
+      campaign.should be_kind_of(ConstantContact::Components::Campaign)
+      campaign.subject.should eq('Example subject line')
+      campaign.email_content.should eq('<body><p>This is text of the email message.</p></body>')
+      campaign.text_content.should eq('This is the text of the email message.')
+    end
+  end
+
   describe "#add_campaign" do
     it "adds a campaign" do
       json = load_file('email_campaign_response.json')
